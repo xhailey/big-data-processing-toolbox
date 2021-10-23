@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- docker is installed on your local machine
+- docker is installed
 - GCP CLI is installed
 - kubectl is installed
 - Helm chart is installed
@@ -11,12 +11,25 @@
 
 **Run UI Application**
 
-    docker build -t big-data-app:latest . -f docker/ui-app/.
+    docker build -t big-data-app:latest . -f docker/ui-app/Dockerfile
     docker run -p 3000:4000 big-data-app:latest
 
 **Build Docker Images**
 
 Jupyter Notebook
+
+    docker build -t jupyter-notebook:latest . -f docker/juptyter/Dockerfile
+    docker run -p 8000:8888 jupyter-notebook:latest
+
+Apache Hadoop
+
+    docker build
+
+Apache Spark
+
+    docker build
+
+SonarQube and SonarScanner
 
     docker build
 
