@@ -27,7 +27,8 @@ Apache Hadoop
 
 Apache Spark
 
-    docker build
+    docker build -t apache-spark:latest . -f docker/spark/Dockerfile
+    docker run -p 8080:8080 apache-spark:latest
 
 SonarQube and SonarScanner
 
