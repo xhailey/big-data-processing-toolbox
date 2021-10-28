@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spark-deployment
+  labels:
+    microservice: spark
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      microservice: spark
+  template:
+    metadata:
+      labels:
+        microservice: spark
+    spec:
+      containers:
+        - name: spark-master
+          image: {{ $imagePath }}
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: spark-master-config
+      restartPolicy: Alway
