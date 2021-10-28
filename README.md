@@ -18,11 +18,11 @@
 
 ## Run the following instructions at the root of this repo
 
-**Pull/Build Docker Images**
+**Pull Docker Images from Docker Hub**
 
   UI App
 
-    docker build -t big-data-app:latest . -f docker/ui-app/Dockerfile
+    docker pull xxpan/big-data-app:latest
 
   Jupyter Notebook
 
@@ -41,17 +41,18 @@
 
     docker pull sonarqube:latest
 
+**Authenticate to the Google Container Registry**
+
+    gcloud auth configure-docker
+
 **Push Dokcer Images to GCR**
 
-Replace $GCP_PROJECT_ID with your project ID.
+Replace $GCP_PROJECT_ID with your project ID below.
 
-    docker tag big-data-app:latest us.gcr.io/$GCP_PROJECT_ID/ui-data-app:latest
-    docker push us.gcr.io/$GCP_PROJECT_ID/ig-data-app:latest
+    docker tag xxpan/big-data-app:latest us.gcr.io/$GCP_PROJECT_ID/big-data-app:latest
+    docker push us.gcr.io/$GCP_PROJECT_ID/big-data-app:latest
 
-    docker tag ibmcom/jupyter-base-notebook us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
-    docker push us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
-
-    docker tag ibmcom/jupyter-base-notebook us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
+    docker tag ibmcom/jupyter-base-notebook-ppc64le:latest us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
     docker push us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
 
     docker tag bitnami/spark:latest us.gcr.io/$GCP_PROJECT_ID/spark:latest
@@ -71,7 +72,22 @@ Replace $GCP_PROJECT_ID with your project ID.
     gcloud container clusters create bigdatacluster --zone=us-east1-d --num-nodes=1 --machine-type=custom-4-12288 
     gcloud container clusters get-credentials bigdatacluster --zone=us-east1-d
 
-**Run helm charts**
+**Check kubectl context**
+
+  Check if your kubectl context is set to the cluster that you created in the previous step.
+
+    kubectl config get-contexts 
+  
+  Otherwise, set the default context to the cluster name
+
+    kubectl config use-context CLUSTER_NAME      
+
+**Create Ingress Resource**
+
+    helm install my-nginx stable/nginx-ingress  
+    kubectl create -f Ingress/ingress.yaml
+
+**Run Helm charts for each service**
   
   Change projectId in values to your project ID
 
