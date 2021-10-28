@@ -1,1 +1,1 @@
-imagePath: "us.gcr.io/$GCP_PROJECT_ID/ui-data-app:latest"
+imagePath: "us.gcr.io/big-data-330419/jupyter-notebook:latest"

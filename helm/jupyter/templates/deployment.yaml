@@ -6,7 +6,7 @@ metadata:
   labels:
     microservice: jupyter
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       microservice: jupyter
@@ -18,5 +18,8 @@ spec:
       containers:
         - name: jupyter-notebook
           image: {{ .Values.imagePath }}
+          env:
+            - name: JUPYTER_TOKEN
+              value: easytoken
           ports:
             - containerPort: 8888

@@ -19,7 +19,7 @@ function App() {
             Apache Spark
           </a>
           <br/><br/> 
-          <a className="App-link" target="_blank" href="/jupyter" >
+          <a className="App-link" target="_blank" href="/jupyter?token=easytoken" >
             Jupyter Notebook
           </a>
           <br/><br/> 
