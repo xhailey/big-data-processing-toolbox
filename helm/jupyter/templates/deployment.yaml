@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: juyter-notebook-deployment
+  labels:
+    microservice: jupyter
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      microservice: jupyter
+  template:
+    metadata:
+      labels:
+        microservice: jupyter
+    spec:
+      containers:
+        - name: jupyter-notebook
+          image: us.gcr.io/{{ $projectId }}/jupyter-notebook:latest
+          ports:
+            - containerPort: 8888
