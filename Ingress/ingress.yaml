@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: big-data-toosl-ingress
@@ -7,39 +7,39 @@ spec:
     - http:
         paths:
           - path: /
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: ui-app-service
                 port: 
-                  name: "80"
                   number: 80
           - path: /jupyter
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: jupyter-service
                 port: 
-                  name: "80"
                   number: 80
           - path: /sonarqube
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: sonarqube-service
                 port: 
-                  name: "80"
                   number: 80
           - path: /spark
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: spark-service
                 port: 
-                  name: "80"
                   number: 80
           - path: /hadoop
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: namenode-service
                 port: 
-                  name: "80"
                   number: 80
           
           
