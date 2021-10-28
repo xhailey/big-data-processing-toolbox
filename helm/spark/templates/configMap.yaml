@@ -3,12 +3,6 @@ kind: ConfigMap
 metadata:
   name: spark-master-config
 data:
-  CHAT_ENDPOINT: '35.241.50.41'
-  MYSQL_DB_HOST: 'mysql-login.default.svc.cluster.local'
-  MYSQL_DB_USER: 'admin'
-  MYSQL_DB_PASSWORD: 'password'
-  MYSQL_DB_PORT: '3306'
-
   SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: 'no'
   SPARK_MODE: 'master'
   SPARK_RPC_AUTHENTICATION_ENABLED: 'no'
