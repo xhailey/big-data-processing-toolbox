@@ -1,1 +1,1 @@
-imagePath: us.gcr.io/$GCP_PROJECT_ID/sonarqube:latest
+imagePath: us.gcr.io/big-data-330419/sonarqube:latest
