@@ -1,1 +1,1 @@
-$imagePath: "us.gcr.io/$GCP_PROJECT_ID/spark:latest"
+imagePath: "us.gcr.io/big-data-330419/spark:latest"
