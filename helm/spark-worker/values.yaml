@@ -1,2 +1,2 @@
 $imagePath: "us.gcr.io/$GCP_PROJECT_ID/spark:latest"
-$masterUrl: "......."
+$masterUrl: "spark://spark.master:7077"

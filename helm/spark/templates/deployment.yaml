@@ -23,4 +23,5 @@ spec:
           envFrom:
             - configMapRef:
                 name: spark-master-config
+          hostname: "spark.master"
       restartPolicy: Alway
