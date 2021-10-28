@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: jupyter-notebook
-          image: us.gcr.io/{{ $projectId }}/jupyter-notebook:latest
+          image: {{ $imagePaht }}
           ports:
             - containerPort: 8888
