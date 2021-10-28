@@ -20,7 +20,8 @@ spec:
       containers:
           envFrom:
             - configMapRef:
-                name: hadoop-env   
+                name: hadoop-env
+          image: {{ .Values.imagePath }}
       restartPolicy: Always
       volumes:
         - name: hadoop-datanode

@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: jupyter-notebook
-          image: {{ $imagePaht }}
+          image: {{ .Values.imagePath }}
           ports:
             - containerPort: 8888

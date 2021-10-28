@@ -1,1 +1,1 @@
-imagePath: "us.gcr.io/$GCP_PROJECT_ID/namenode:latest"
+imagePath: "us.gcr.io/$GCP_PROJECT_ID/datanode:latest"

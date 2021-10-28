@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: spark-worker
-          image: {{ $imagePath }}
+          image: {{ .Values.imagePath }}
           ports:
             - containerPort: 8081
           envFrom:

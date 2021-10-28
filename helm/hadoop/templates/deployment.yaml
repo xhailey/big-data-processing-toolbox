@@ -20,7 +20,7 @@ spec:
           envFrom:
             - configMapRef:
                 name: hadoop-env
-          image: {{ $imagePath }}
+          image: {{ .Values.imagePath }}
           name: namenode
           ports:
             - containerPort: 9870
