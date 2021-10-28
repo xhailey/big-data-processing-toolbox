@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datanode-deployment
+  labels:
+    microservice: datanode
+  name: datanode
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      microservice: datanode
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        microservice: datanode
+    spec:
+      containers:
+          envFrom:
+            - configMapRef:
+                name: hadoop-env   
+      restartPolicy: Always
+      volumes:
+        - name: hadoop-datanode
+          persistentVolumeClaim:
+            claimName: hadoop-datanode
