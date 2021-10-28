@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: namenode-deployment
+  labels:
+    microservice: namenode
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      microservice: namenode
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        microservice: namenode
+    spec:
+      containers:
+          envFrom:
+            - configMapRef:
+                name: hadoop-env
+          image: {{ $imagePath }}
+          name: namenode
+          ports:
+            - containerPort: 9870
+            - containerPort: 9000
+          volumeMounts:
+            - mountPath: /hadoop/dfs/name
+              name: hadoop-namenode
+      restartPolicy: Always
+      volumes:
+        - name: hadoop-namenode
+          persistentVolumeClaim:
+            claimName: hadoop-namenode
+status: {}
