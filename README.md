@@ -6,42 +6,88 @@
 - GCP CLI is installed
 - kubectl is installed
 - Helm chart is installed
+- A GCP project is created
+- GCP CLI is authenticated
+
+      gcloud auth login
+
+- The GCP project is set
+
+       gcloud config set project PROJECT_ID
+
 
 ## Run the following instructions at the root of this repo
 
-**Run UI Application**
+**Pull/Build Docker Images**
+
+  UI App
 
     docker build -t big-data-app:latest . -f docker/ui-app/Dockerfile
-    docker run -p 3000:4000 big-data-app:latest
 
-**Build Docker Images**
+  Jupyter Notebook
 
-Jupyter Notebook
+    docker pull ibmcom/jupyter-base-notebook-ppc64le:latest
+  
+  Apache Spark
 
-    docker build -t jupyter-notebook:latest . -f docker/juptyter/Dockerfile
-    docker run -p 8000:8888 jupyter-notebook:latest
+    docker pull bitnami/spark:latest
 
-Apache Hadoop
+  Apache Hadoop (master and worker nodes)
 
-    docker build
+    docker pull bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+    docker pull bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
 
-Apache Spark
+  SonarQube
 
-    docker build -t apache-spark:latest . -f docker/spark/Dockerfile
-    docker run -p 8080:8080 apache-spark:latest
+    docker pull sonarqube:latest
 
-SonarQube and SonarScanner
+**Push Dokcer Images to GCR**
 
-    docker build
+Replace $GCP_PROJECT_ID with your project ID.
 
-**Push Docker Images to GCR**
+    docker tag big-data-app:latest us.gcr.io/$GCP_PROJECT_ID/ui-data-app:latest
+    docker push us.gcr.io/$GCP_PROJECT_ID/ig-data-app:latest
 
-    docker push
+    docker tag ibmcom/jupyter-base-notebook us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
+    docker push us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
 
-**Create GCP create cluster**
+    docker tag ibmcom/jupyter-base-notebook us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
+    docker push us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
 
-    gcp
+    docker tag bitnami/spark:latest us.gcr.io/$GCP_PROJECT_ID/spark:latest
+    docker push us.gcr.io/$GCP_PROJECT_ID/spark:latest
+
+    docker tag bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8 us.gcr.io/$GCP_PROJECT_ID/namenode:latest
+    docker push us.gcr.io/$GCP_PROJECT_ID/hadoop-master:latest
+
+    docker tag bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8 us.gcr.io/$GCP_PROJECT_ID/datanode:latest
+    docker push us.gcr.io/$GCP_PROJECT_ID/hadoop-worker:latest
+
+    docker tag sonarqube:latest us.gcr.io/$GCP_PROJECT_ID/sonarqube:latest
+    docker push us.gcr.io/$GCP_PROJECT_ID/sonarqube:latest
+
+**Create Kubernete cluster**
+
+    gcloud container clusters create bigdatacluster --zone=us-east1-d --num-nodes=1 --machine-type=custom-4-12288 
+    gcloud container clusters get-credentials bigdatacluster --zone=us-east1-d
 
 **Run helm charts**
+  
+  Change projectId in values to your project ID
 
-    helm install
+    helm install jupyter-notebook helm/jupyter/
+
+**Pahts to each services**
+UI APP
+/big-data-tools
+
+Jupyter Notebook
+/jupyter
+
+/spark
+/spark/worker
+
+/hadoop
+/datanoade
+
+/sonarqube
