@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: ui-app
-          image: {{ $imagePath }}
+          image: {{ .Values.imagePath }}
           ports:
             - containerPort: 4000
