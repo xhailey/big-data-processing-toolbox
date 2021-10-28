@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-app-deployment
+  labels:
+    microservice: ui-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      microservice: ui-app
+  template:
+    metadata:
+      labels:
+        microservice: ui-app
+    spec:
+      containers:
+        - name: ui-app
+          image: {{ $imagePath }}
+          ports:
+            - containerPort: 4000
