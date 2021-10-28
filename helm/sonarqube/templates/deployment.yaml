@@ -2,21 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sonarqude-deployment
+  name: sonarqube-deployment
   labels:
-    microservice: sonarqude
+    microservice: sonarqube
 spec:
   replicas: 3
   selector:
     matchLabels:
-      microservice: sonarqude
+      microservice: sonarqube
   template:
     metadata:
       labels:
-        microservice: sonarqude
+        microservice: sonarqube
     spec:
       containers:
-        - name: sonarqude
+        - name: sonarqube
           image: {{ .Values.imagePath }}
           ports:
             - containerPort: 9000
