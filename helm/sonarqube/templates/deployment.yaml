@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarqude-deployment
+  labels:
+    microservice: sonarqude
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      microservice: sonarqude
+  template:
+    metadata:
+      labels:
+        microservice: sonarqude
+    spec:
+      containers:
+        - name: sonarqude
+          image: {{ .Values.imagePath }}
+          ports:
+            - containerPort: 9000
+          envFrom:
+            - configMapRef:
+                name: sonarqube-config
+          resources:
+            requests:
+              cpu: "200m"
