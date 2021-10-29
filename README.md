@@ -15,7 +15,6 @@
 
        gcloud config set project PROJECT_ID
 
-
 ## Run the following instructions at the root of this repo
 
 **Pull Docker Images from Docker Hub**
@@ -26,8 +25,8 @@
 
   Jupyter Notebook
 
-    docker pull ibmcom/jupyter-base-notebook-ppc64le:latest
-  
+    docker pull jupyter/datascience-notebook:latest
+
   Apache Spark
 
     docker pull bitnami/spark:latest
@@ -47,12 +46,12 @@
 
 **Push Dokcer Images to GCR**
 
-Replace $GCP_PROJECT_ID with your project ID below.
+Replace `$GCP_PROJECT_ID` with your project ID below.
 
     docker tag xxpan/big-data-app:latest us.gcr.io/$GCP_PROJECT_ID/big-data-app:latest
     docker push us.gcr.io/$GCP_PROJECT_ID/big-data-app:latest
 
-    docker tag ibmcom/jupyter-base-notebook-ppc64le:latest us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
+    docker tag jupyter/datascience-notebook:latest us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
     docker push us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
 
     docker tag bitnami/spark:latest us.gcr.io/$GCP_PROJECT_ID/spark:latest
@@ -87,11 +86,20 @@ Replace $GCP_PROJECT_ID with your project ID below.
     helm install my-nginx stable/nginx-ingress  
     kubectl create -f Ingress/ingress.yaml
 
-**Run Helm charts for each service**
-  
-  Change projectId in values to your project ID
+  Just in case you want to delete the ingress,
 
-    helm install jupyter-notebook helm/jupyter/
+        kubectl delete -f Ingress/ingress.yaml
+
+**Install Helm charts for each service**
+  
+  Update `$GCP_PROJECT_ID` in values.yaml in each folder in the helm directory
+  
+
+    helm install ui-app helm/ui-app
+    helm install jupyter helm/jupyter/
+    helm install sonarqube helm/sonarqube
+    helm install spark helm/spark
+    helm install hadoop helm/hadoop
 
 **Pahts to each services**
 UI APP
