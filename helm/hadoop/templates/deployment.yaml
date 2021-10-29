@@ -17,20 +17,23 @@ spec:
         microservice: namenode
     spec:
       containers:
+        - name: namenode
+          env:
+            - name: CLUSTER_NAME
+              value: test
           envFrom:
             - configMapRef:
                 name: hadoop-env
           image: {{ .Values.imagePath }}
-          name: namenode
           ports:
             - containerPort: 9870
             - containerPort: 9000
-          volumeMounts:
-            - mountPath: /hadoop/dfs/name
-              name: hadoop-namenode
-      restartPolicy: Always
-      volumes:
-        - name: hadoop-namenode
-          persistentVolumeClaim:
-            claimName: hadoop-namenode
-status: {}
+      #     volumeMounts:
+      #       - mountPath: /hadoop/dfs/name
+      #         name: hadoop-namenode
+      # restartPolicy: Always
+      # resources: {}
+      # volumes:
+      #   - name: hadoop-namenode
+      #     persistentVolumeClaim:
+      #       claimName: hadoop-namenode

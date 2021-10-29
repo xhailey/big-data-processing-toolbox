@@ -3,11 +3,10 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     microservice: hadoop-namenode
-  name: hadoop-namenode-volumn
+  name: hadoop-namenode
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 100Mi
-status: {}
