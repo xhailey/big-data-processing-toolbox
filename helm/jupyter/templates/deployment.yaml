@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: jupyter-notebook
-          image: {{ .Values.imagePath }}
+          image: jupyter/datascience-notebook:latest
           env:
             - name: JUPYTER_TOKEN
               value: easytoken

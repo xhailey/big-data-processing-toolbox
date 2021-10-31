@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: sonarqube
-          image: {{ .Values.imagePath }}
+          image: sonarqube:latest
           ports:
             - containerPort: 9000
           envFrom:
