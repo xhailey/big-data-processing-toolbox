@@ -69,9 +69,7 @@
         kubectl delete -f Ingress/ingress.yaml
 
 **Install Helm charts for each service**
-  
-  Update `$GCP_PROJECT_ID` in values.yaml in each folder in the helm directory
-  
+    
   Deploy UI app
 
     helm install ui-app helm/ui-app
