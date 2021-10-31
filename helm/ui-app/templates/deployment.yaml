@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: ui-app
-          image: {{ .Values.imagePath }}
+          image: xxpan/big-data-app:latest
           ports:
             - containerPort: 4000
