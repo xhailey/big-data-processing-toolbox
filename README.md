@@ -1,7 +1,34 @@
 # big-data-processing-toolbox
 
-## Prerequisites
+## Images on Docker Hub
+  UI App
 
+   https://hub.docker.com/repository/docker/xxpan/big-data-app
+
+  Jupyter Notebook
+
+    https://hub.docker.com/r/jupyter/datascience-notebook
+    docker pull jupyter/datascience-notebook:latest
+
+  Apache Spark
+
+    https://hub.docker.com/r/bitnami/spark  
+    docker pull bitnami/spark:latest
+
+  Apache Hadoop (master and worker nodes)
+
+    https://hub.docker.com/r/bde2020/hadoop-namenode
+    docker pull bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+
+    https://hub.docker.com/r/bde2020/hadoop-datanode
+    docker pull bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+
+  SonarQube
+
+    https://hub.docker.com/_/sonarqube
+    docker pull sonarqube:latest
+
+## Prerequisites
 - docker is installed
 - GCP CLI is installed
 - kubectl is installed
@@ -16,55 +43,6 @@
        gcloud config set project PROJECT_ID
 
 ## Run the following instructions at the root of this repo
-
-**Pull Docker Images from Docker Hub**
-
-  UI App
-
-    docker pull xxpan/big-data-app:latest
-
-  Jupyter Notebook
-
-    docker pull jupyter/datascience-notebook:latest
-
-  Apache Spark
-
-    docker pull bitnami/spark:latest
-
-  Apache Hadoop (master and worker nodes)
-
-    docker pull bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
-    docker pull bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
-
-  SonarQube
-
-    docker pull sonarqube:latest
-
-**Authenticate to the Google Container Registry**
-
-    gcloud auth configure-docker
-
-**Push Dokcer Images to GCR**
-
-Replace `$GCP_PROJECT_ID` with your project ID below.
-
-    docker tag xxpan/big-data-app:latest us.gcr.io/$GCP_PROJECT_ID/big-data-app:latest
-    docker push us.gcr.io/$GCP_PROJECT_ID/big-data-app:latest
-
-    docker tag jupyter/datascience-notebook:latest us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
-    docker push us.gcr.io/$GCP_PROJECT_ID/jupyter-notebook:latest
-
-    docker tag bitnami/spark:latest us.gcr.io/$GCP_PROJECT_ID/spark:latest
-    docker push us.gcr.io/$GCP_PROJECT_ID/spark:latest
-
-    docker tag bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8 us.gcr.io/$GCP_PROJECT_ID/namenode:latest
-    docker push us.gcr.io/$GCP_PROJECT_ID/hadoop-master:latest
-
-    docker tag bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8 us.gcr.io/$GCP_PROJECT_ID/datanode:latest
-    docker push us.gcr.io/$GCP_PROJECT_ID/hadoop-worker:latest
-
-    docker tag sonarqube:latest us.gcr.io/$GCP_PROJECT_ID/sonarqube:latest
-    docker push us.gcr.io/$GCP_PROJECT_ID/sonarqube:latest
 
 **Create Kubernete cluster**
 
@@ -94,11 +72,25 @@ Replace `$GCP_PROJECT_ID` with your project ID below.
   
   Update `$GCP_PROJECT_ID` in values.yaml in each folder in the helm directory
   
+  Deploy UI app
 
     helm install ui-app helm/ui-app
+
+  Deploy Jupyter Notebook
+
     helm install jupyter helm/jupyter/
+
+  Deploy Sonarqube
+
     helm install sonarqube helm/sonarqube
-    helm install spark helm/spark
+
+  Deploy Spark
+
+    1. helm install spark helm/spark
+    2. find and enter the pod
+   
+  Deploy Hadoop
+
     helm install hadoop helm/hadoop
 
 **Pahts to each services**
