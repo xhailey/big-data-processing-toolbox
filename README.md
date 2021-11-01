@@ -98,8 +98,70 @@ Lastly, run the following to deploy worker
 
 <span style="color:blue">**Deploy Hadoop**</span>
 
-    helm install hadoop helm/hadoop
+Step 1 - Install namenode
+
+    helm install hadoop-namenode helm/hadoop
+
+Step 2 - Install datanode
+
+Find the pod name of the namenode
+
+    kubectl get pods
+
+![get pods](./png/get-pods.png)
+
+Find the Pod IP and port of the namenode.
+
+    kubectl describe pods NAMENODE_POD_N
+
+![namenode ip](./png/namenode-podip.png)
+
+Copy and paste the namenode pod IP to Line 24 in `helm/hadoop/datanode/deployment.yaml`. Change the IP address only, don't change the port number.
+
+![namenode ip](./png/datanode-namenode-ip.png)
+
+Lastly, run 
+
+    helm install hadoop-datanode helm/hadoop/datanode
 
 <span style="color:blue">**Deploy UI Application**</span>
 
+Step 1 - Find the IP addresses and port for the following services, namenode, sonarqube-service, jupyter-service, spark-services.
+
+    kubectl get service
+
+![service list](./png/service-list.png)
+
+Step 2 - Replace the service IP address from Line 4-7 in `big-data-processing-toolbox-app/src/App.js` with the IP adderss and port that you found in the previous step. Note that namenode services has the port number 9870.  
+
+```
+  namenode -> hadoopIp
+  sonarqube-service -> sonarqubeIp
+  jupyter-service -> jupyterIp
+  spark-service -> sparkIp
+```
+
+![service url](./png/service-urls.png)
+
+Step 3 - Build the UI App Image
+
+  docker build -t big-data-app:latest . -f docker/ui-app/Dockerfile
+
+Step 4 - Push the image to a repo at your choice
+
+  dokcer tag big-data-app:latest YOUR_REPO_NAME/big-data-app:latest
+  dokcer push YOUR_REPO_NAME/big-data-app:latest
+
+Step 5 - Set the image url at Line 19 in `helm\ui-app\deployment.yaml`
+
+Step 6 - Install the UI app
+
     helm install ui-app helm/ui-app
+
+## Nevigate to the UI app
+
+Find the external IP of the `ui-app-service`, and paste the IP in the browser to see the UI app. Click on each link to neviagea to different microservices
+
+      kubectl get service
+  
+
