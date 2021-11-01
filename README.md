@@ -164,4 +164,5 @@ Find the external IP of the `ui-app-service`, and paste the IP in the browser to
 
       kubectl get service
   
+![ui app](./png/ui-app.png)
 
