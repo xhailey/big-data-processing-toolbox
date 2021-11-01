@@ -145,12 +145,12 @@ Step 2 - Replace the service IP address from Line 4-7 in `big-data-processing-to
 
 Step 3 - Build the UI App Image
 
-  docker build -t big-data-app:latest . -f docker/ui-app/Dockerfile
+    docker build -t big-data-app:latest . -f docker/ui-app/Dockerfile
 
 Step 4 - Push the image to a repo at your choice
 
-  dokcer tag big-data-app:latest YOUR_REPO_NAME/big-data-app:latest
-  dokcer push YOUR_REPO_NAME/big-data-app:latest
+    dokcer tag big-data-app:latest YOUR_REPO_NAME/big-data-app:latest
+    dokcer push YOUR_REPO_NAME/big-data-app:latest
 
 Step 5 - Set the image url at Line 19 in `helm\ui-app\deployment.yaml`
 
