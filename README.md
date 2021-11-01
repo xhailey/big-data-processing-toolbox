@@ -100,7 +100,7 @@ Lastly, run the following to deploy worker
 
 Step 1 - Install namenode
 
-    helm install hadoop-namenode helm/hadoop
+    helm install hadoop-namenode helm/hadoop/namenode
 
 Step 2 - Install datanode
 
