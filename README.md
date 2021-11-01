@@ -17,8 +17,12 @@
 
   Apache Hadoop (master and worker nodes)
 
+  Namenode
+
     https://hub.docker.com/r/bde2020/hadoop-namenode
     docker pull bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
+
+  Datanode
 
     https://hub.docker.com/r/bde2020/hadoop-datanode
     docker pull bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
@@ -29,21 +33,22 @@
     docker pull sonarqube:latest
 
 ## Prerequisites
-- docker is installed
-- GCP CLI is installed
-- kubectl is installed
-- Helm chart is installed
-- A GCP project is created
-- GCP CLI is authenticated
+- Install Docker
+- Install GCP CLI
+- Install kubectl
+- Install Helm 
+
+    https://helm.sh/docs/using_helm/#installing-helm
+- Create GCP project
+- Authenticate GCP CLI
 
       gcloud auth login
 
-- The GCP project is set
+- Set GCP project
 
        gcloud config set project PROJECT_ID
 
-## Run the following instructions at the root of this repo
-
+## Get Ready
 **Create Kubernete cluster**
 
     gcloud container clusters create bigdatacluster --zone=us-east1-d --num-nodes=1 --machine-type=custom-4-12288 
@@ -57,51 +62,44 @@
   
   Otherwise, set the default context to the cluster name
 
-    kubectl config use-context CLUSTER_NAME      
+    kubectl config use-context CLUSTER_NAME    
 
-**Create Ingress Resource**
+## Install Helm charts for each service. Run the following instructions at the root of this repo  
 
-    helm install my-nginx stable/nginx-ingress  
-    kubectl create -f Ingress/ingress.yaml
-
-  Just in case you want to delete the ingress,
-
-        kubectl delete -f Ingress/ingress.yaml
-
-**Install Helm charts for each service**
-    
-  Deploy UI app
-
-    helm install ui-app helm/ui-app
-
-  Deploy Jupyter Notebook
+<span style="color:blue">**Deploy Jupyter Notebook**</span>
 
     helm install jupyter helm/jupyter/
 
-  Deploy Sonarqube
+<span style="color:blue">**Deploy Sonarqube**</span>
 
     helm install sonarqube helm/sonarqube
 
-  Deploy Spark
+<span style="color:blue">**Deploy Spark**</span>
 
-    1. helm install spark helm/spark
-    2. find and enter the pod
-   
-  Deploy Hadoop
+  Step 1 - Install master 
+
+      helm install spark-master helm/spark/master
+      
+  Step 2 - Install worker
+      
+  Find the spark master url (spark-service's pod name) in the spark-service details page on GCP.
+  Open the sidebar -> Kubernetes Engine -> Clusters -> Services & Ingress -> Select the service named "spark-service" 
+
+![service details](./png/spark-master-service-details.png)
+
+  Copy and paste the url to line 7 `helm/spark/worker/configMap.yaml` as shown below
+
+![worker config](./png/spark-worker-config.png)
+
+Lastly, run
+
+    helm install spark-worker helm/spark/worker
+
+<span style="color:blue">**Deploy Hadoop**</span>
+
 
     helm install hadoop helm/hadoop
 
-**Pahts to each services**
-UI APP
-/big-data-tools
+<span style="color:blue">**Deploy UI Application**</span>
 
-Jupyter Notebook
-/jupyter
-
-/spark
-/spark/worker
-
-/hadoop
-/datanoade
-
-/sonarqube
+    helm install ui-app helm/ui-app
