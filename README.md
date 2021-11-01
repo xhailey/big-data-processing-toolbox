@@ -158,7 +158,7 @@ Step 6 - Install the UI app
 
     helm install ui-app helm/ui-app
 
-The UI app deploymen takes awhile. Grab a coffee and come back to check the UI app ：）.
+The UI app deploymen takes awhile. Grab a coffee and come back to check the UI app.	&#128512;
 
 ## Nevigate to the UI app
  
