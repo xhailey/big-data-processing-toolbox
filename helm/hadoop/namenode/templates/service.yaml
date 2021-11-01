@@ -4,7 +4,7 @@ metadata:
   name: namenode-service
   labels:
     microservice: namenode
-  name: namenode
+  name: hadoop-namenode
 spec:
   type: LoadBalancer
   ports:
