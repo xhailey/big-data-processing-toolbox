@@ -158,8 +158,10 @@ Step 6 - Install the UI app
 
     helm install ui-app helm/ui-app
 
-## Nevigate to the UI app
+The UI app deploymen takes awhile. Grab a coffee and come back to check the UI app ：）.
 
+## Nevigate to the UI app
+ 
 Find the external IP of the `ui-app-service`, and paste the IP in the browser to see the UI app. Click on each link to neviagea to different microservices
 
       kubectl get service
