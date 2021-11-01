@@ -20,20 +20,19 @@ spec:
         - name: namenode
           env:
             - name: CLUSTER_NAME
-              value: test
+              value: big-data
           envFrom:
             - configMapRef:
                 name: hadoop-env
-          image: {{ .Values.imagePath }}
+          image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
           ports:
             - containerPort: 9870
             - containerPort: 9000
       #     volumeMounts:
-      #       - mountPath: /hadoop/dfs/name
-      #         name: hadoop-namenode
-      # restartPolicy: Always
-      # resources: {}
+      #       - name: dfs 
+      #         mountPath: /hadoop/dfs/name
+      restartPolicy: Always
       # volumes:
-      #   - name: hadoop-namenode
+      #   - name: dfs
       #     persistentVolumeClaim:
-      #       claimName: hadoop-namenode
+      #       claimName: dfs-hadoop-namenode

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datanode-deployment
+  labels:
+    microservice: datanode
+  name: datanode
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      microservice: datanode
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        microservice: datanode
+    spec:
+      containers:
+        - name: datanode
+          env:
+            - name: SERVICE_PRECONDITION
+              value: 10.0.0.57:9870
+          envFrom:
+            - configMapRef:
+                name: hadoop-env
+          image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+          # volumeMounts:
+          #   - name: dfs
+          #     mountPath: /hadoop/dfs/data
+      restartPolicy: Always
+      # volumes:
+      #   - name: dfs
+      #     persistentVolumeClaim:
+      #       claimName: dfs-datanode

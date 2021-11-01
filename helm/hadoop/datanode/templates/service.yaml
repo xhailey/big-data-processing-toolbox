@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: datanode-service
+  labels:
+    microservice: datanode
+  name: datanode
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 9864
+      targetPort: 9864
+  selector:
+    microservice: datanode
