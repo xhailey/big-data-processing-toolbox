@@ -76,27 +76,27 @@
 
 <span style="color:blue">**Deploy Spark**</span>
 
-  Step 1 - Install master 
+Step 1 - Install master 
 
       helm install spark-master helm/spark/master
       
-  Step 2 - Install worker
+Step 2 - Install worker
       
-  Find the spark master url (spark-service's pod name) in the spark-service details page on GCP.
-  Open the sidebar -> Kubernetes Engine -> Clusters -> Services & Ingress -> Select the service named "spark-service" 
+Use the following command to find the pod name of the master, the pod name should start with "spark-deployment".
 
-![service details](./png/spark-master-service-details.png)
+    kubectl get pods
 
-  Copy and paste the url to line 7 `helm/spark/worker/configMap.yaml` as shown below
+![master pod name](./png/get-spark-master-podname.png)
+
+Copy and paste the pod name to line 7 `helm/spark/worker/configMap.yaml` as shown below
 
 ![worker config](./png/spark-worker-config.png)
 
-Lastly, run
+Lastly, run the following to deploy worker
 
     helm install spark-worker helm/spark/worker
 
 <span style="color:blue">**Deploy Hadoop**</span>
-
 
     helm install hadoop helm/hadoop
 
