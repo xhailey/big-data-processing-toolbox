@@ -17,10 +17,17 @@ spec:
     spec:
       containers:
         - name: spark-master
-          image: {{ .Values.imagePath }}
+          image: bitnami/spark:latest
           ports:
             - containerPort: 8080
           envFrom:
             - configMapRef:
                 name: spark-master-config
+        # - name: spark-worker
+        #   image: bitnami/spark:latest
+        #   ports:
+        #     - containerPort: 8081
+        #   envFrom:
+        #     - configMapRef:
+        #         name: spark-worker-config
       restartPolicy: Always

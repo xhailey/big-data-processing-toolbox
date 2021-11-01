@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spark-worker-config
+data:
+  SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: 'no'
+  SPARK_MASTER_URL: 'spark://spark-deployment-648568d4f7-dvhrd:7071'  # update this to master's pod name 
+  SPARK_MODE: 'worker'
+  SPARK_RPC_AUTHENTICATION_ENABLED: 'no'
+  SPARK_RPC_ENCRYPTION_ENABLED: 'no'
+  SPARK_SSL_ENABLED: 'no'
+  SPARK_WORKER_CORES: '1'
+  SPARK_WORKER_MEMORY: '1G'
