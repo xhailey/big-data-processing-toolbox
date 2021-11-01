@@ -1,1 +1,0 @@
-FROM ibmcom/jupyter-base-notebook-ppc64le:latest
