@@ -149,8 +149,8 @@ Step 3 - Build the UI App Image
 
 Step 4 - Push the image to a repo at your choice
 
-    dokcer tag big-data-app:latest YOUR_REPO_NAME/big-data-app:latest
-    dokcer push YOUR_REPO_NAME/big-data-app:latest
+    docker tag big-data-app:latest YOUR_REPO_NAME/big-data-app:latest
+    docker push YOUR_REPO_NAME/big-data-app:latest
 
 Step 5 - Set the image url at Line 19 in `helm\ui-app\deployment.yaml`
 
@@ -158,7 +158,7 @@ Step 6 - Install the UI app
 
     helm install ui-app helm/ui-app
 
-The UI app deploymen takes awhile. Grab a coffee and come back to check the UI app.	&#128512;
+The UI app deploymen takes awhile. Grab a coffee and come back to check the UI app.	&#128516;
 
 ## Nevigate to the UI app
  
