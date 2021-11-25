@@ -1,15 +1,11 @@
 import './App.css';
+import config from './config';
 
 function App() {
-  var hadoopIp = "127.0.0.1";
-  var sparkIp = "127.0.0.1";
-  var jupyterIp = "127.0.0.1";
-  var sonarqubeIp = "127.0.0.1";
-
-  var hadoopUrl = "http://" + hadoopIp;
-  var sparkUrl = "http://" + sparkIp;
-  var jupyterUrl = "http://" + jupyterIp + "?token=easytoken";
-  var sonarqubeUrl = "http://" + sonarqubeIp;
+  var hadoopUrl = "http://" + config["hadoopIp"];
+  var sparkUrl = "http://" + config.sparkIp;
+  var jupyterUrl = "http://" + config.jupyterIp + "?token=easytoken";
+  var sonarqubeUrl = "http://" + config.sonarqubeIp;
   return (
     <div className="App">
       <header className="App-header">
