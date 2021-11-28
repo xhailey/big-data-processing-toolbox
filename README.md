@@ -145,9 +145,13 @@ You can monitor the application start status by `kubectl logs ui-app-0`, the app
 
 ## Nevigate to the UI app
  
-Find the external IP of the `ui-app-service`, and paste the IP in the browser to see the UI app. Click on each link to neviagea to different microservices
+Find the external IP of the `ui-app-service`.
 
-      kubectl get service
+      kubectl get service ui-app-service  
+
+![ui app ip](./png/ui-app-ip.png)
   
+Nevigate to the IP address in the browser to see the UI app. Click on each link to neviagea to different microservices.
+
 ![ui app](./png/ui-app.png)
 
