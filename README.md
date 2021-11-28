@@ -84,7 +84,7 @@ Step 2 - Install worker
       
 Use the following command to find the external IP address of the `spark-service`.
 
-    kubectl get service
+    kubectl get service spark-service
 
 ![master pod name](./png/spark-master-ip.png)
 
