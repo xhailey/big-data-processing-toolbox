@@ -1,10 +1,23 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: hadoop-datanode-service
+  name: datanode
   labels:
     microservice: datanode
-  name: datanode
+spec:
+  clusterIP: "None" 
+  ports:
+    - port: 9864
+      targetPort: 9864
+  selector:
+    microservice: datanode
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: datanode-ui
+  labels:
+    microservice: datanode-ui
 spec:
   type: LoadBalancer
   ports:

@@ -1,17 +1,16 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: datanode-deployment
+  name: datanode
   labels:
     microservice: datanode
   name: datanode
 spec:
+  serviceName: datanode
   replicas: 1
   selector:
     matchLabels:
       microservice: datanode
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
@@ -21,11 +20,13 @@ spec:
         - name: datanode
           env:
             - name: SERVICE_PRECONDITION
-              value: 10.0.0.57:9870
+              value: namenode.default.svc.cluster.local:9870
           envFrom:
             - configMapRef:
                 name: hadoop-datanode-env
           image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+          ports:
+            - containerPort: 9864
           # volumeMounts:
           #   - name: dfs
           #     mountPath: /hadoop/dfs/data

@@ -1,16 +1,15 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: namenode-deployment
+  name: namenode
   labels:
     microservice: namenode
 spec:
+  serviceName: namenode
   replicas: 1
   selector:
     matchLabels:
       microservice: namenode
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
