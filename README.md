@@ -82,13 +82,14 @@ Step 1 - Install master
       
 Step 2 - Install worker
       
-Use the following command to find the pod name of the master, the pod name should start with "spark-deployment".
+Use the following command to find the external IP address of the `spark-service`.
 
-    kubectl get pods
+    kubectl get service
 
-![master pod name](./png/get-spark-master-podname.png)
+![master pod name](./png/spark-master-ip.png)
 
-Copy and paste the pod name to line 7 `helm/spark/worker/configMap.yaml` as shown below
+
+Replace the IP address at line 7 in `helm/spark/worker/configMap.yaml` with `spark-service`'s IP address.
 
 ![worker config](./png/spark-worker-config.png)
 
@@ -103,24 +104,6 @@ Step 1 - Install namenode
     helm install hadoop-namenode helm/hadoop/namenode
 
 Step 2 - Install datanode
-
-Find the pod name of the namenode
-
-    kubectl get pods
-
-![get pods](./png/get-pods.png)
-
-Find the Pod IP and port of the namenode.
-
-    kubectl describe pods NAMENODE_POD_N
-
-![namenode ip](./png/namenode-podip.png)
-
-Copy and paste the namenode pod IP to Line 24 in `helm/hadoop/datanode/deployment.yaml`. Change the IP address only, don't change the port number.
-
-![namenode ip](./png/datanode-namenode-ip.png)
-
-Lastly, run 
 
     helm install hadoop-datanode helm/hadoop/datanode
 
