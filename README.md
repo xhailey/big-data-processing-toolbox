@@ -107,24 +107,17 @@ Step 2 - Install datanode
 
     helm install hadoop-datanode helm/hadoop/datanode
 
-<span style="color:blue">**Deploy UI Application**</span>
+<span style="color:blue">**Deploy Driver UI Application**</span>
 
-Step 1 - Find the IP addresses and port for the following services, namenode, sonarqube-service, jupyter-service, spark-services.
+Step 1 - Find the external IP addresses and port for the following services, `namenode-ui`, `sonarqube-service`, `jupyter-service`, `spark-service`.
 
-    kubectl get service
+    kubectl get svc jupyter-service namenode-ui sonarqube-service spark-service
 
-![service list](./png/service-list.png)
+![service list](./png/ui-service-list.png)
 
-Step 2 - Replace the service IP address from Line 4-7 in `big-data-processing-toolbox-app/src/App.js` with the IP adderss and port that you found in the previous step. Note that namenode services has the port number 9870.  
+Step 2 - Replace the IP addresses from Line 2-5 in `big-data-processing-toolbox-app/src/config.js` with the IP adderss and port that you found in the previous step. Follow the comments in the file. **Note that namenode services has the port number 9870.** 
 
-```
-  namenode -> hadoopIp
-  sonarqube-service -> sonarqubeIp
-  jupyter-service -> jupyterIp
-  spark-service -> sparkIp
-```
-
-![service url](./png/service-urls.png)
+![service url](./png/ui-app-config.png)
 
 Step 3 - Build the UI App Image
 
@@ -133,15 +126,22 @@ Step 3 - Build the UI App Image
 Step 4 - Push the image to a repo at your choice
 
     docker tag big-data-app:latest YOUR_REPO_NAME/big-data-app:latest
+
     docker push YOUR_REPO_NAME/big-data-app:latest
 
 Step 5 - Set the image url at Line 19 in `helm\ui-app\deployment.yaml`
 
-Step 6 - Install the UI app
+![set ui app image url](./png/set-ui-app-image-url.png)
+
+Step 6 - Deploy the UI app
 
     helm install ui-app helm/ui-app
 
-The UI app deploymen takes awhile. Grab a coffee and come back to check the UI app.	&#128516;
+**This UI app deploymen takes awhile due to the application build time. Grab a coffee and come back to check the UI app.**	&#128516;
+
+You can monitor the application start status by `kubectl logs ui-app-0`, the application is ready when you see the following.
+
+![ui app ready](./png/ui-app-ready.png)
 
 ## Nevigate to the UI app
  
