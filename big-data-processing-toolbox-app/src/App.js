@@ -2,7 +2,7 @@ import './App.css';
 import config from './config';
 
 function App() {
-  var hadoopUrl = "http://" + config["hadoopIp"];
+  var hadoopUrl = "http://" + config.hadoopIp;
   var sparkUrl = "http://" + config.sparkIp;
   var jupyterUrl = "http://" + config.jupyterIp + "?token=easytoken";
   var sonarqubeUrl = "http://" + config.sonarqubeIp;
