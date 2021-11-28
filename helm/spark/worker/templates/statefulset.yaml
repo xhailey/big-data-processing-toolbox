@@ -1,27 +1,27 @@
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: spark-deployment
+  name: spark-worker
   labels:
-    microservice: spark
+    microservice: spark-worker
 spec:
+  serviceName: spark-worker
   replicas: 1
   selector:
     matchLabels:
-      microservice: spark
+      microservice: spark-worker
   template:
     metadata:
       labels:
-        microservice: spark
+        microservice: spark-worker
     spec:
       containers:
-        - name: spark-master
+        - name: spark-worker
           image: bitnami/spark:latest
           ports:
-            - containerPort: 8080
-            - containerPort: 7077
+            - containerPort: 8081
           envFrom:
             - configMapRef:
-                name: spark-master-config
+                name: spark-worker-config
       restartPolicy: Always
