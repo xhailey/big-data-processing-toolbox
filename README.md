@@ -77,7 +77,7 @@
 
 <span style="color:blue">**Deploy Jupyter Notebook**</span>
 
-The Jupyter Helm chart produces one service and one deployment.
+The Jupyter-notebook Helm chart produces one service and one deployment.
 
     helm install jupyter helm/jupyter/
 
@@ -85,19 +85,19 @@ The Jupyter Helm chart produces one service and one deployment.
 
 The Sonarqube Helm chart produces one service and one deployment.
 
-    helm install sonarqube helm/sonarqube
+    helm install sonar helm/sonarqube
 
 <span style="color:blue">**Deploy Spark**</span>
 
 Step 1 - Install master 
 
-The spark-master Helm chart produces one stateful set and one service.
+The Spark master Helm chart produces one stateful set and one service.
 
-      helm install spark-master helm/spark/master
+      helm install master helm/spark/master
       
 Step 2 - Install worker
 
-The spark-worker Helm chart produces one stateful set and one service.
+The Spark worker Helm chart produces one stateful set and one service.
     
 a. Use the following command to find the external IP address of the `spark-service`.
 
@@ -112,17 +112,21 @@ b. Replace the IP address at line 7 in `helm/spark/worker/configMap.yaml` with `
 
 c. Lastly, run the following to deploy worker
 
-    helm install spark-worker helm/spark/worker
+    helm install worker helm/spark/worker
 
 <span style="color:blue">**Deploy Hadoop**</span>
 
 Step 1 - Install namenode
 
-    helm install hadoop-namenode helm/hadoop/namenode
+The Hadoop namenode Helm chart produces one stateful set and two services, one for the namenode UI and one for internal communication with the datanode.
+
+    helm install namenode helm/hadoop/namenode
 
 Step 2 - Install datanode
 
-    helm install hadoop-datanode helm/hadoop/datanode
+The Hadoop datanode Helm chart produces one stateful set and two services, one for the datanode UI and one for internal communication with the namenode.
+
+    helm install datanode helm/hadoop/datanode
 
 <span style="color:blue">**Deploy Driver UI Application**</span>
 
