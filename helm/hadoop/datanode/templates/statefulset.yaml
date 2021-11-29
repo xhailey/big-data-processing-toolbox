@@ -27,11 +27,4 @@ spec:
           image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
           ports:
             - containerPort: 9864
-          # volumeMounts:
-          #   - name: dfs
-          #     mountPath: /hadoop/dfs/data
       restartPolicy: Always
-      # volumes:
-      #   - name: dfs
-      #     persistentVolumeClaim:
-      #       claimName: dfs-datanode
