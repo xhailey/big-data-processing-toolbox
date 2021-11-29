@@ -41,7 +41,7 @@
 
   **Helm** is a tool that maintains the relationship of Kubernetes objects within a cluster. Helm helps manage Kubernetes applications. Helm Charts are the primary means of organizing these relationships. Helm Charts helps you define, install, and upgrade even the most complex Kubernetes application. Helm Charts are composed of template files that can be parameterized to deploy uniquely configured versions of an application.
 
-  Make sure you install helm properly.
+  Check if you install helm properly.
 
       helm --help
 
@@ -73,7 +73,7 @@
 
     kubectl config use-context CLUSTER_CONTEXTS    
 
-## Install Helm charts to deploy to microservices. Run the following instructions at the root of this repo  
+## Install Helm charts to deploy microservices. Run the following instructions at the root of this repo.
 
 <span style="color:blue">**Deploy Jupyter Notebook**</span>
 
@@ -98,19 +98,19 @@ The spark-master Helm chart produces one stateful set and one service.
 Step 2 - Install worker
 
 The spark-worker Helm chart produces one stateful set and one service.
-      
-Use the following command to find the external IP address of the `spark-service`.
+    
+a. Use the following command to find the external IP address of the `spark-service`.
 
     kubectl get service spark-service
 
 ![master pod name](./png/spark-master-ip.png)
 
 
-Replace the IP address at line 7 in `helm/spark/worker/configMap.yaml` with `spark-service`'s IP address.
+b. Replace the IP address at line 7 in `helm/spark/worker/configMap.yaml` with `spark-service`'s IP address.
 
 ![worker config](./png/spark-worker-config.png)
 
-Lastly, run the following to deploy worker
+c. Lastly, run the following to deploy worker
 
     helm install spark-worker helm/spark/worker
 
