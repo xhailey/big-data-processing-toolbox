@@ -4,10 +4,9 @@
 
   **Code Walkthrough & Deployments**
 
-  This video includes code walkthrough and deployments all microservices (including the driver app). If you have questions about the deployment process, please refer to the deployment steps in this file.
+  This video includes code walkthrough and deployments for all microservices (including the driver app). If you have questions about the deployment process, please refer to the deployment steps in this file.
 
-  
-
+  https://youtu.be/7Hc8ATtvZcc
 
   **Functionality Demo**
 
@@ -173,7 +172,7 @@ The UI app Helm chart produces a stateful set and a serivce.
 
     helm install ui-app helm/ui-app
 
-**This UI app deploymen takes awhile due to the application build time. Grab a coffee and come back to check the UI app.**	&#128516;
+**This UI app deployment takes awhile due to the application build time. Grab a coffee and come back to check the UI app.**	&#128516;
 
 You can monitor the application start status by `kubectl logs ui-app-0`, the application is ready when you see the following in the pod's log.
 
