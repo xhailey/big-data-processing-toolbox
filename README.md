@@ -156,13 +156,51 @@ Step 5 - Set the image url at Line 19 in `helm\ui-app\deployment.yaml`
 
 Step 6 - Deploy the UI app
 
+The UI app Helm chart produces a stateful set and a serivce.
+
     helm install ui-app helm/ui-app
 
 **This UI app deploymen takes awhile due to the application build time. Grab a coffee and come back to check the UI app.**	&#128516;
 
-You can monitor the application start status by `kubectl logs ui-app-0`, the application is ready when you see the following.
+You can monitor the application start status by `kubectl logs ui-app-0`, the application is ready when you see the following in the pod's log.
 
 ![ui app ready](./png/ui-app-ready.png)
+
+## Check the full deployment
+By now, all microservices should be ready to work. Please check the following to make sure you have everything.
+
+1. check installed Helm charts
+
+        helm list
+
+![Helm list](./png/helm-list.png)
+
+2. check services
+
+        kubectl get service
+
+![get service](./png/get-service.png)
+
+3. check deployment
+
+        kubectl get deployment
+
+![get deployment](./png/get-deployment.png)
+
+4. check stateful set
+
+        kubectl get statefulset
+
+![get deployment](./png/get-statefulset.png)
+
+5. check GCP console UI
+
+**Kubernetes Engine** -> **Clusters**
+![get deployment](./png/gcp-cluster.png)
+
+**Kubernetes Engine** -> **Workloads**
+
+**Kubernetes Engine** -> **Services and Ingress**
 
 ## Nevigate to the UI app
  
