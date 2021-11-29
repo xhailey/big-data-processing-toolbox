@@ -34,11 +34,18 @@
 
 ## Prerequisites
 - Install Docker
-- Install GCP CLI
 - Install kubectl
 - Install Helm 
 
-    https://helm.sh/docs/using_helm/#installing-helm
+  https://helm.sh/docs/using_helm/#installing-helm
+
+  **Helm** is a tool that maintains the relationship of Kubernetes objects within a cluster. Helm helps manage Kubernetes applications. Helm Charts are the primary means of organizing these relationships. Helm Charts helps you define, install, and upgrade even the most complex Kubernetes application. Helm Charts are composed of template files that can be parameterized to deploy uniquely configured versions of an application.
+
+  Make sure you install helm properly.
+
+      helm --help
+
+- Install GCP CLI
 - Create GCP project
 - Authenticate GCP CLI
 
@@ -48,7 +55,7 @@
 
        gcloud config set project PROJECT_ID
 
-## Get Ready
+## Cluster setup
 **Create Kubernete cluster**
 
     gcloud container clusters create bigdatacluster --zone=us-east1-d --num-nodes=1 --machine-type=custom-4-12288 
@@ -60,17 +67,23 @@
 
     kubectl config get-contexts 
   
-  Otherwise, set the default context to the cluster name
+![get context](./png/get-contexts.png)
 
-    kubectl config use-context CLUSTER_NAME    
+  Otherwise, set the default context to the previously created cluster
 
-## Install Helm charts for each service. Run the following instructions at the root of this repo  
+    kubectl config use-context CLUSTER_CONTEXTS    
+
+## Install Helm charts to deploy to microservices. Run the following instructions at the root of this repo  
 
 <span style="color:blue">**Deploy Jupyter Notebook**</span>
+
+The Jupyter Helm chart produces one service and one deployment.
 
     helm install jupyter helm/jupyter/
 
 <span style="color:blue">**Deploy Sonarqube**</span>
+
+The Sonarqube Helm chart produces one service and one deployment.
 
     helm install sonarqube helm/sonarqube
 
@@ -78,9 +91,13 @@
 
 Step 1 - Install master 
 
+The spark-master Helm chart produces one stateful set and one service.
+
       helm install spark-master helm/spark/master
       
 Step 2 - Install worker
+
+The spark-worker Helm chart produces one stateful set and one service.
       
 Use the following command to find the external IP address of the `spark-service`.
 
