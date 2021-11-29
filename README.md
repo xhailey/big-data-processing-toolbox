@@ -110,7 +110,7 @@ a. Use the following command to find the external IP address of the `spark-servi
 ![master pod name](./png/spark-master-ip.png)
 
 
-b. Replace the IP address at line 7 in `helm/spark/worker/configMap.yaml` with `spark-service`'s IP address.
+b. Replace the IP address at line 7 in `helm/spark/worker/templates/configMap.yaml` with `spark-service`'s IP address.
 
 ![worker config](./png/spark-worker-config.png)
 
@@ -154,7 +154,7 @@ Step 4 - Push the image to a repo at your choice
 
     docker push YOUR_REPO_NAME/big-data-app:latest
 
-Step 5 - Set the image url at Line 19 in `helm\ui-app\deployment.yaml`
+Step 5 - Set the image url at Line 20 in `helm\ui-app\templates\statefulset.yaml`
 
 ![set ui app image url](./png/set-ui-app-image-url.png)
 
