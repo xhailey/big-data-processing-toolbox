@@ -83,7 +83,7 @@ The Jupyter-notebook Helm chart produces one service and one deployment.
 
 <span style="color:blue">**Deploy Sonarqube**</span>
 
-The Sonarqube Helm chart produces one service and one deployment.
+The Sonarqube Helm chart produces one configMap, one service and one deployment.
 
     helm install sonar helm/sonarqube
 
@@ -91,13 +91,13 @@ The Sonarqube Helm chart produces one service and one deployment.
 
 Step 1 - Install master 
 
-The Spark master Helm chart produces one stateful set and one service.
+The Spark master Helm chart produces one configMap, one stateful set and one service.
 
       helm install master helm/spark/master
       
 Step 2 - Install worker
 
-The Spark worker Helm chart produces one stateful set and one service.
+The Spark worker Helm chart produces one configMap, one stateful set and one service.
     
 a. Use the following command to find the external IP address of the `spark-service`.
 
@@ -118,13 +118,13 @@ c. Lastly, run the following to deploy worker
 
 Step 1 - Install namenode
 
-The Hadoop namenode Helm chart produces one stateful set and two services, one for the namenode UI and one for internal communication with the datanode.
+The Hadoop namenode Helm chart produces one configMap, one stateful set and two services, one for the namenode UI and one for internal communication with the datanode.
 
     helm install namenode helm/hadoop/namenode
 
 Step 2 - Install datanode
 
-The Hadoop datanode Helm chart produces one stateful set and two services, one for the datanode UI and one for internal communication with the namenode.
+The Hadoop datanode Helm chart produces one configMap, one stateful set and two services, one for the datanode UI and one for internal communication with the namenode.
 
     helm install datanode helm/hadoop/datanode
 
@@ -196,11 +196,13 @@ By now, all microservices should be ready to work. Please check the following to
 5. check GCP console UI
 
 **Kubernetes Engine** -> **Clusters**
-![get deployment](./png/gcp-cluster.png)
+![gcp cluster](./png/gcp-cluster.png)
 
 **Kubernetes Engine** -> **Workloads**
+![get workload](./png/gcp-workload.png)
 
 **Kubernetes Engine** -> **Services and Ingress**
+![gcp service](./png/gcp-service.png)
 
 ## Nevigate to the UI app
  
