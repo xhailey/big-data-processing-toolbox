@@ -1,8 +1,17 @@
 # big-data-processing-toolbox
 
-## Video
+## Videoes
 
-  https://youtube.com
+  **Code Walkthrough & Deployments**
+
+  This video includes code walkthrough and deployments all microservices (including the driver app). If you have questions about the deployment process, please refer to the deployment steps in this file.
+
+  
+
+
+  **Functionality Demo**
+
+  https://youtu.be/yi3DrQWlrnE
 
 ## Images on Docker Hub
   UI App
